@@ -2,8 +2,19 @@
   color: white;
 }
 .link:hover {
-  color: rgb(211, 149, 35);
+  color: black;
 }
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover td {
   background-color: coral;
+}
+
+.text-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+}
+
+.img {
+  border-radius: 50%;
 }

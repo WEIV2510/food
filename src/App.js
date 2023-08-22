@@ -1,41 +1,30 @@
-import React, { useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { Container, Button, Table } from "react-bootstrap";
+import { Container, Button, Image } from "react-bootstrap";
 import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 import Contact from "./Contact";
 
-export function Layout() {
+
+export function Menu() {
   return (
-    <nav className="bg-secondary p-2 mb-3 text-left">
+    <nav className="p-3 mb-2 bg-warning text-white saraban">
       <NavLink
         to="/"
-        className="link px-2"
-        style={({ isActive }) => { 
+        className="link px-2 "
+        style={({ isActive, isPending }) => {
           return {
-            textDecoration: isActive ? "none" : "none",
+            textDecoration: isActive ? "none" : "underline",
           };
         }}
       >
         หน้าแรก
       </NavLink>
       <NavLink
-        to="/product"
+        to="/Contact"
         className="link px-2"
         style={({ isActive }) => {
           return {
-            textDecoration: isActive ? "none" : "none",
-          };
-        }}
-      >
-        ตารางเทียบเเคลอรี
-      </NavLink>
-      <NavLink
-        to="/contact"
-        className="link px-2"
-        style={({ isActive }) => {
-          return {
-            textDecoration: isActive ? "none" : "none",
+            textDecoration: isActive ? "none" : "underline",
           };
         }}
       >
@@ -45,91 +34,43 @@ export function Layout() {
   );
 }
 
-function Index() {
-  const header1 = useRef();
+function Foodlist(props) {
   return (
-    <>
-      <Layout />
-      <h3 ref={header1} ><img className='card-07' src="card-07.jpg" alt='food1' width="100" height="100" />;</h3>
-      <h4><b>เมี่ยงคำกลีบบัวหลวงแบบโบราณ</b></h4>
-      <Button
-        onClick={() => {
-          header1.current.innerHTML = "";
-        }}
-      >
-        เรียนรู้เพิ่มเติม
-      </Button>
-      
-      <h3 ref={header1} ><img className='card-07' src="f0701.jpg" alt='food1' width="100" height="100"/>;</h3>
-      <h4><b>แกงเห็ดเผำะไข่มดแดง</b></h4>
-      <Button
-        onClick={() => {
-          header1.current.innerHTML = "";
-        }}
-      >
-        เรียนรู้เพิ่มเติม
-      </Button>
-      
-      <h3 ref={header1} ><img className='card-07' src="card-07.jpg" alt='food1'width="100" height="100" />;</h3>
-      <h4><b>แกงอ่อมหอยขม</b></h4>
-      <Button
-        onClick={() => {
-          header1.current.innerHTML = "ื";
-        }} 
-      >
-        เรียนรู้เพิ่มเติม
-      </Button>
-    </>
+    <div className="column text-center">
+      <Image className="img-fluid" width="35%" />
+      <h4 className="midtr">{props.name}</h4>
+      <p className="itim">{props.desc}</p>
+      <Button className="mb-3">วิธีทำ</Button>
+    </div>
   );
 }
-
-function Product() {
-  const table = useRef();
-  const tr = useRef([]);
-  const DeleteRow = (i) => {
-    const index = tr.current[i].rowIndex;
-    table.current.deleteRow(index);
-  };
-
-  const data = [
-    ["เมี่ยงคำกลีบบัวหลวงแบบโบราณ", 120],
-    ["แกงเห็ดเผำะไข่มดแดง ", 50],
-    ["แกงอ่อมหอยขม", 40],
-  ];
-
+function Footer() {
+  return <div className="text-right saraban">2023 @ Developed by Ratthakarn M.</div>;
+}
+function Index() {
   return (
     <>
-      <Layout />
-      <h4>Products</h4>
-      <Table striped bordered hover className="my-3" ref={table}>
-        <thead>
-          <tr>
-            <th>เมนูอาหาร</th>
-            <th>พลังงานที่ได้รับ</th>
-            <th>เลือกเมนู</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item, i) => {
-            return (
-              <tr
-                ref={(el) => {
-                  tr.current[i] = el;
-                }}
-                key={i}
-              >
-                <td>{item[0]}</td>
-                <td>{item[1]}</td>
-                <td className="text-center">
-                  <Button variant="danger" onClick={() => DeleteRow(i)}>
-                    Delete
-                  </Button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
+      <div className="row">
+        <Menu />
+        <Foodlist
+          img="2-1.png"
+          name="ข้าวหมูทอดทงคัตสึ"
+          desc="เริ่มกันที่ เมนูอาหารญี่ปุ่น ยอดฮิตอย่าง ข้าวหมูทอดทงคัตสึ ข้าวหมูทอดสไตล์ญี่ปุ่น ที่จะทำให้คุณหลังรักการกินหมูทอด ด้วยสัมผัสที่กรอบนอกนุ่มใน อร่อยได้ในคำเดียว ทำให้เป็นหนึ่งในเมนูยอดนิยมของคนไทยเลยก็ว่าได้ ซึ่งสูตรนี้ได้มาจาก เชฟโฌ เชฟชาวญี่ปุ่นแท้ ๆ เลยทีเดียว รับรองว่า ถ้าทำขาย รสชาติอร่อย ไม่แพ้ร้านอาหารญี่ปุ่นชื่อดังแน่นอน"
+        />
+
+        <Foodlist
+          img="2-2.png"
+          name="ข้าวหมูทอดคัตสึด้ง"
+          desc="ข้าวหมูทอด สไตล์ญี่ปุ่น ที่มีความแตกต่างจาก ข้าวหน้าหมูทงคัตสึ ตรงที่ หมูทอดนั้น จะถูกนำไปตุ๋นรวมกับไข่ แล้วราดลงบนข้าวอีกทีหนึ่ง ทำให้เป็น เมนูอาหารญี่ปุ่น ที่ได้รสชาติของซุปไข่ กินแล้วไม่ฝืด ลื่นคอกำลังดี"
+        />
+
+        <Foodlist
+          img="2-3.png"
+          name="ข้าวแกงกะหรี่ญี่ปุ่น"
+          desc="อีกหนึ่งเมนู ข้าวหมูทอด สไตล์ เมนูอาหารญี่ปุ่น ที่อร่อยและเข้มข้นยิ่งขึ้น เมื่อได้แกงกะหรี่รสชาติเข้มข้นมาทานคู่กัน จะทำให้คุณได้เพลิดเพลิน กับทั้งรสชาติของแกงกะหรี่และหมูทอดในมื้อเดียว"
+        />
+      </div>
+      <Footer />
     </>
   );
 }
@@ -141,8 +82,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/main" element={<Index />} />
-          <Route path="/product" element={<Product />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/Contact" element={<Contact />} />
         </Routes>
       </Container>
     </BrowserRouter>
